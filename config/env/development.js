@@ -1,0 +1,43 @@
+'use strict';
+
+module.exports = {
+	db: 'mongodb://jose:Jgv2015!@dbh15.mongolab.com:27157/dailyplanner',
+	app: {
+		title: 'dailyPlanner - Development Environment'
+	},
+	facebook: {
+		clientID: process.env.FACEBOOK_ID || '1603795949869652',
+		clientSecret: process.env.FACEBOOK_SECRET || '316aa9d3ccfdc3155e8bf3509e2851f8',
+		callbackURL: '/auth/facebook/callback'
+	},
+	twitter: {
+		clientID: process.env.TWITTER_KEY || 'LzQJykOwUu6rlv77S8bd2gS3a',
+		clientSecret: process.env.TWITTER_SECRET || 'IAGUbXTD9o8DJ6wyt5qMwazps7NeOALg5sbF4bbPWqgnpsD7l0',
+		callbackURL: '/auth/twitter/callback'
+	},
+	google: {
+		clientID: process.env.GOOGLE_ID || '777251935734-cfecfi06tetl4hu7uf6l3o9ajjr07e9h.apps.googleusercontent.com',
+		clientSecret: process.env.GOOGLE_SECRET || 'lQVpKYzIopMViswKoXR537fN',
+		callbackURL: '/auth/google/callback'
+	},
+	linkedin: {
+		clientID: process.env.LINKEDIN_ID || 'APP_ID',
+		clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
+		callbackURL: '/auth/linkedin/callback'
+	},
+	github: {
+		clientID: process.env.GITHUB_ID || 'cc0677135dec2743f07e',
+		clientSecret: process.env.GITHUB_SECRET || 'b79bd0d18d49de92589ad75d3f91d765c2db8189',
+		callbackURL: '/auth/github/callback'
+	},
+	mailer: {
+		from: process.env.MAILER_FROM || 'MAILER_FROM',
+		options: {
+			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+			auth: {
+				user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
+				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+			}
+		}
+	}
+};

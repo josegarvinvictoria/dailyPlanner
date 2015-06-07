@@ -1,0 +1,53 @@
+<section class="row" data-ng-controller="GoogleoptionsController" ng-init = "init()">
+    <h3 class="col-md-12 text-center">Opciones sobre Google Calendar</h3>
+    <div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2" style="text-align: center;">
+        <fieldset data-ng-if="autoritzat">
+            <h5 class="text-success">Dailyplanner ja té autorització per veure els teus calendaris!</h5>
+        </fieldset>
+        
+        <div class="apartat" data-ng-if="!calendaris">
+           <div class="separator"></div>
+            <fieldset>
+                <h5>Estem verificant si tenim accés als teus calendari...</h5>
+            </fieldset>
+            <div class="separator"></div>
+        </div>
+        <div class="separator"></div>
+        <div class="apartat" data-ng-if="calendaris">
+            <fieldset>
+                <h5>A continuació es mostren els calendaris trobats:</h5>
+                <div class="separator"></div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center;">Descripció del calendari</th>
+                            <th style="text-align:center;">Calendari principal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in calendaris">
+                            <td>{{c.summary}}</td>
+                            <td data-ng-if="c.primary == true">X</td>
+                            <td data-ng-if="c.primary != true"></td>
+                            <td><input type="button" value="Importar" ng-click="importCalendar(c)"></input></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </fieldset>
+            <div class="separator"></div>
+        </div>
+    </div>
+</section>
+<style>
+.col-md-offset-5{
+margin-left: 25%;
+}
+.col-md-2{
+width: 50%;
+}
+.separator {
+    height: 30px;
+}
+
+</style>

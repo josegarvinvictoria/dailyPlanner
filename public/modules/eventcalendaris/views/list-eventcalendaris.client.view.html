@@ -1,0 +1,128 @@
+   <div data-ng-controller="CalendarController" data-ng-init="init()">
+    <section >
+        <div class="page-header">
+            <h1 class="pacificoBlue animated fadeIn delay-0.5">Eventos actuales:</h1>
+        </div>
+        <div class="llistaEvents">
+
+           
+           <tabset  class="list-group col-md-5">
+    <tab ng-repeat="calendari in calendaris" heading="{{calendari.nom}}" active="tab.active" disable="tab.disabled">
+        <ul style="height: 580px; overflow: scroll;" class="llistatEvents  animated fadeIn delay-0">
+                <li ng-repeat="eventcalendari in calendari.events" data-ng-href="#!/eventcalendaris/{{eventcalendari._id}}" class="list-group-item">
+                    <h5 class="list-group-item-heading"><b>{{eventcalendari.nom}}</b></h5>
+                  <h5 class="list-group-item-heading">Fecha del evento: {{formatDate(eventcalendari.data_inici_event)}}</h5>
+                    <div data-ng-if="!eventcalendari.toteldia">
+                        <h5 class="list-group-item-heading">Hora inicio: {{eventcalendari.hora_inici_event}}</h5>
+                        <h5 class="list-group-item-heading">Hora final: {{eventcalendari.hora_final_event}}</h5>
+                    </div>
+                    <h4 class="list-group-item-heading" data-ng-bind="eventcalendari.notificar"></h4>
+                    <small class="list-group-item-text">
+                    Fecha de creción
+                    <span data-ng-bind="eventcalendari.created | date:'medium'"></span>
+                        por
+                    <span data-ng-bind="eventcalendari.user.displayName"></span>
+                    </small>
+                    <div style="float:right; margin-top:-40px;" data-ng-controller="EventcalendarisController">
+                        <a class="btn btn-primary" href="/#!/eventcalendaris/{{eventcalendari._id}}/edit">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                        <a class="btn btn-primary" data-ng-click="remove(eventcalendari)">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+    </tab>
+               <div class="alert alert-warning text-center animated fadeIn delay-1" data-ng-if="noEvents">
+                   Actualmente no hay ningun evento guardado.  <a href="/#!/eventcalendaris/create">Crea uno nuevo ahora</a>!
+               </div>
+  </tabset>
+
+            <!--<ul class="list-group col-md-5" style="height: 580px; overflow: scroll;" data-ng-controller="CalendarController" data-ng-init="find()">
+                <li data-ng-repeat="eventcalendari in eventcalendaris" data-ng-href="#!/eventcalendaris/{{eventcalendari._id}}" class="list-group-item">
+                    <h3 class="list-group-item-heading" data-ng-bind="eventcalendari.nom"></h3>
+                    <h4 class="list-group-item-heading" data-ng-bind="eventcalendari.tipus"></h4>
+                    <h4 class="list-group-item-heading" data-ng-bind="eventcalendari.data"></h4>
+                    <h4 class="list-group-item-heading" data-ng-bind="eventcalendari.notificar"></h4>
+                    <small class="list-group-item-text">
+                    Posted on
+                    <span data-ng-bind="eventcalendari.created | date:'medium'"></span>
+                    by
+                    <span data-ng-bind="eventcalendari.user.displayName"></span>
+                    </small>
+                    <div style="float:right; margin-top:-40px;">
+                        <a class="btn btn-primary" href="/#!/eventcalendaris/{{eventcalendari._id}}/edit">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                        <a class="btn btn-primary" data-ng-click="remove(eventcalendari)">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </div>
+                </li>
+                <div class="alert alert-warning text-center" data-ng-hide="!eventcalendaris.$resolved || eventcalendaris.length">
+                    No has creat cap event, en vols <a href="/#!/eventcalendaris/create">crear un de nou</a>?
+                </div>
+            </ul>-->
+        </div>
+    </section>
+    <section id="directives-calendar"  id="calendari" class="col-md-7 animated fadeIn delay-1" >
+        
+          
+
+        <!-- <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                        <h4>{{alertMessage}}</h4>
+                </div>
+                <div class="btn-toolbar">
+                        <p class="pull-right lead">Calendar One View Options</p>
+                        <div class="btn-group">
+                                <button class="btn btn-success" ng-click="changeView('agendaDay', 'calendar')">AgendaDay</button>
+                                <button class="btn btn-success" ng-click="changeView('agendaWeek', 'calendar')">AgendaWeek</button>
+                                <button class="btn btn-success" ng-click="changeView('month', 'calendar')">Month</button>
+                        </div>
+                </div>
+                <div class="span8 calendar" id="calen" ng-model="eventSources" calendar="calendar" ui-calendar="uiCalendarConfig.calendar"></div>
+                
+            <!--<div ng-controller="CalendarController" >
+                        <div class="btn-group">
+                                <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar2')">Dia</button>
+                                <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar2')">Semana</button>
+                                <button class="btn btn-success" ng-click="changeView('month', 'myCalendar2')">Mes</button>
+                    </div><div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div></div>-->
+        <div ui-calendar="uiConfig.calendar" style="heigth:50px;" class="calendar span8" ng-model="eventSources" calendar="calendar"></div>
+    </section>
+
+</div>
+
+
+   <script>
+
+       $(document).ready(function(){
+           $(".botoEliminar").click(function(event){
+               console.log('Detected');
+           });
+       });
+   </script>
+
+
+
+
+<style>
+.fc-time{
+    visibility: hidden;
+}
+    
+.fc-content{
+    margin-left: -10px;
+}
+    
+.llistatEvents{
+    padding-left: 0px;
+
+}
+    
+    
+    
+
+</style>

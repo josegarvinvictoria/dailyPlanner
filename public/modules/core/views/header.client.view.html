@@ -1,0 +1,81 @@
+<div class="container" data-ng-controller="HeaderController">
+	<div class="navbar-header">
+		<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a href="/#!/" class="navbar-brand pacificoWhite animated fadeInDown delay-1" >dailyPlanner</a>
+	</div>
+	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
+			<!--<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
+				<a ng-switch-when="dropdown" class="dropdown-toggle">
+					<span data-ng-bind="item.title" class="pacificoWhite"></span>
+					<b class="caret"></b>
+				</a>
+				<ul ng-switch-when="dropdown" class="dropdown-menu">
+					<li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
+						<a href="/#!/{{subitem.link}}" class="pacificoWhite" data-ng-bind="subitem.title"></a>
+					</li>
+				</ul>
+				<a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
+			</li>-->
+
+			<li >
+				<a href="/#!/eventcalendaris" class="opcioMenu animated fadeInDown delay-2">
+					<span class="pacificoWhite">Mi calendario</span>
+				</a>
+			</li>
+
+			<li >
+				<a href="/#!/eventcalendaris/create" class="opcioMenu  animated fadeInDown delay-2">
+					<span class="pacificoWhite">Añadir un nuevo evento</span>
+				</a>
+			</li>
+
+		</ul>
+		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user" >
+			<li >
+				<a href="/#!/signup" class="opcioMenu  animated fadeInDown delay-1">
+					<span class="pacificoWhite">Registro</span>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+			<li >
+				<a href="/#!/signin" class="opcioMenu  animated fadeInDown delay-1">
+					<span class="pacificoWhite">Acceso</span>
+				</a>
+			</li>
+
+
+
+		</ul>
+		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user" >
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle  animated fadeInDown delay-1" data-toggle="dropdown">
+					<img ng-src="http://dailyplanner.com:3000/api/llistaimatges" alt="..." class="img-rounded userImage"><span data-ng-bind="authentication.user.displayName" class="pacificoWhite animated fadeInDown delay-1"></span> <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a class="pacificoWhite" href="/#!/settings/profile">Editar mi perfil</a>
+					</li>
+					<li data-ng-if="authentication.user.provider == 'google'">
+						<a class="pacificoWhite" href="/#!/settings/googleoptions">Google Calendar Options</a>
+					</li>
+					<li>
+						<a class="pacificoWhite" href="/#!/settings/accounts">Gestionar mis redes sociales</a>
+					</li>
+					<li data-ng-show="authentication.user.provider === 'local'">
+						<a class="pacificoWhite" href="/#!/settings/password">Cambiar mi clave de acceso</a>
+					</li>
+
+					<li>
+						<a class="pacificoWhite" href="/auth/signout">Salir</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>
