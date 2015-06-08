@@ -1,22 +1,9 @@
-
-
-/* Eventcalendaris service used to communicate Eventcalendaris REST endpoints
-angular.module('eventcalendaris').factory('Eventcalendaris', ['$resource',
-	function($resource) {
-		return $resource('eventcalendaris/:eventcalendariId', { eventcalendariId: '@_id'
-		}, {
-			update: {
-				method: 'PUT'
-			}
-		});
-	}
-]);
-
-*/
-
 'use strict';
 
-//Eventcalendaris service used to communicate Eventcalendaris REST endpoints
+/**
+ * Servei Eventcalendaris.
+ * Servei que s'encarrega de fer les operacions sobre la base de dades.
+ **/
 angular.module('eventcalendaris').factory('Eventcalendaris', ['$resource', '$rootScope',
  function ($resource, $rootScope) {
 
@@ -59,7 +46,7 @@ angular.module('eventcalendaris').factory('Eventcalendaris', ['$resource', '$roo
                     method: 'GET',
                     isArray: false
  }
-            }),
+            })
         };
 
         api().query(function (events) {

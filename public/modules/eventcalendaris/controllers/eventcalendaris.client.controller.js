@@ -42,8 +42,11 @@ angular.module('eventcalendaris').controller('EventcalendarisController', ['$sco
         };
 
 
-
-        // Remove existing Eventcalendari
+        /**
+         * Eliminar un eventcalendari existent.
+         *
+         * @param eventcalendari --> Eventcalendari a esborrar.
+         */
         $scope.remove = function (eventcalendari) {
             $scope.eventEsborrat = eventcalendari;
 
@@ -82,18 +85,27 @@ angular.module('eventcalendaris').controller('EventcalendarisController', ['$sco
 
 
         };
-        // Update existing Eventcalendari
+
+
+        /**
+         * Actualitzar un eventcalendari.
+         */
         $scope.update = function () {
             var eventcalendari = $scope.eventcalendari;
             eventcalendari.$update(function () {
-                $location.path('eventcalendaris/' + eventcalendari._id);
+                $location.path('eventcalendaris');
+
+                $window.location.reload();
+
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
         };
 
 
-        // Find a list of Eventcalendaris
+        /**
+         * Cercar una llista amb tots els eventscalendaris.
+         */
         $scope.find = function () {
             Eventcalendaris.query(function (cal) {
                 $scope.eventcalendaris = cal;
@@ -101,7 +113,9 @@ angular.module('eventcalendaris').controller('EventcalendarisController', ['$sco
         };
 
 
-        // Find existing Eventcalendari
+        /**
+         * Cercar un eventcalendari de la llista.
+         */
         $scope.findOne = function () {
             $scope.eventcalendari = Eventcalendaris.api.get({
                 eventcalendariId: $stateParams.eventcalendariId

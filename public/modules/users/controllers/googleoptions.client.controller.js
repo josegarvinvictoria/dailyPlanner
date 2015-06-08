@@ -29,9 +29,7 @@ angular.module('users').controller('GoogleoptionsController', ['$scope', 'Google
                             text: "Estas a punt de donar accés als teus calendaris de Google. Vols continuar?",
                             type: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "Si!",
-                            cancelButtonText: "No, no vull donar accès!",
+                            confirmButtonColor: "#DD6B55", confirmButtonText: "Si!", cancelButtonText: "No, no vull donar accès!",
                             closeOnConfirm: false,
                             closeOnCancel: false
                         }, function (isConfirm) {

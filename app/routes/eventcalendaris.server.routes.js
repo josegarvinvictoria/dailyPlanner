@@ -16,7 +16,7 @@ module.exports = function(app) {
 	/**
 	 * Obtenir un event a partir del nom i del tipus al que pertany.
 	 */
-    app.route('/eventcalendaris/:nom/:tipus').get(eventcalendaris.getOne);
+    app.route('/eventcalendaris/:nom/:tipus').get(users.requiresLogin, eventcalendaris.getOne);
 
 
 	/**
@@ -29,7 +29,7 @@ module.exports = function(app) {
 	 * Obtenir els events de Dailyplanner d'un usuari.
 	 */
     app.route('/eventcalendaris/eventsDP')
-		.get(eventcalendaris.listDPEvents);
+		.get(users.requiresLogin, eventcalendaris.listDPEvents);
 
 
 	app.route('/eventcalendaris/:eventcalendariId')

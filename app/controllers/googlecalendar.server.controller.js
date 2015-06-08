@@ -4,7 +4,6 @@ var authed, oAuthClient;
 var googleConfig = {
     clientID: '777251935734-cfecfi06tetl4hu7uf6l3o9ajjr07e9h.apps.googleusercontent.com',
     clientSecret: 'lQVpKYzIopMViswKoXR537fN',
-    calendarId: 'josegarvinvictoria@gmail.com',
     redirectURL: 'http://dailyplanner.com:3000/auth'
 };
 /**
@@ -18,7 +17,9 @@ var mongoose = require('mongoose'),
 // Dependency setup
 var express = require('express'),
     moment = require('moment'),
+
     google = require('googleapis');
+
 // Initialization
 var app = express(),
     calendar = google.calendar('v3');
@@ -114,21 +115,16 @@ exports.calendarList = function (req, res) {
             access_type: 'offline',
             scope: 'https://www.googleapis.com/auth/calendar.readonly'
         });
-        /*res.redirect(url);*/
+
         res.status(230).json({'url': url});
     } else {
         // Format today's date
         var today = moment().format('YYYY-MM-DD') + 'T';
         // Call google to fetch events for today on our calendar
         calendar.calendarList.list({
-            //calendarId: googleConfig.calendarId,
-            //maxResults: 20,
-            //timeMin: today + '00:00:00.000Z',
-            //timeMax: today + '23:59:59.000Z',
             auth: oAuthClient
         }, function (err, calendars) {
             if (err) {
-                console.log('El token a caducat');
                 console.log(err);
             } else {
                 // Send our JSON response back to the browser
@@ -138,6 +134,8 @@ exports.calendarList = function (req, res) {
         });
     }
 };
+
+
 /**
  * List of Google Events by Calendar ID
  */

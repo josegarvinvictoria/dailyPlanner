@@ -5,11 +5,45 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="control-label" for="name">Título</label>
                     <div class="controls">
                         <input type="text" data-ng-model="eventcalendari.name" id="name" class="form-control" placeholder="Name" required>
                     </div>
+                </div>-->
+                <div class="form-group">
+
+                    <div class="controls">
+                        <input type="text" data-ng-model="eventcalendari.nom" class="form-control nomEvent" placeholder="Títol de l'event" required>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="controls">
+                        Tot el dia: <input type="checkbox" data-ng-model="eventcalendari.toteldia" id="toteldia" class="form-control checkBox" required/>
+                    </div>
+                    <div class="separator"></div>
+
+
+                    <div class="controls"  id="dates">
+                        <input type="date" data-ng-model="eventcalendari.data_inici_event" id="data_inici_event" class="form-control datepicker"required/>
+                        <input type="time" data-ng-model="eventcalendari.hora_inici_event" id="hora_inici_event" class="form-control datepicker" required/>
+                        <span id="aSeparator">a</span>
+                        <input type="date" data-ng-model="eventcalendari.data_final_event" id="data_final_event" class="form-control datepicker" required/>
+                        <input type="time" data-ng-model="eventcalendari.hora_final_event" id="hora_final_event" class="form-control datepicker" required/>
+
+                    </div>
+                    <div class="separator"></div>
+
+
+
+                    <!--<div class='input-group date' id='datetimepicker1'>
+                                                                <input type='text' class="form-control"/>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                                    </span>
+                    </div>-->
+                    <!--<label class="control-label" for="name">Notificar</label>
+                                                            <div class="controls">
+                                                                        <input type="checkbox" data-ng-model="notificar" id="notificar" class="form-control" placeholder="notificar" required>
+                    </div>-->
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
@@ -21,3 +55,45 @@
         </form>
     </div>
 </section>
+
+<style>
+    .datepicker {
+        width: 15%;
+        display: inline-block;
+        margin: auto;
+    }
+    .nomEvent {
+        width: 50%;
+    }
+    .separator {
+        height: 20px;
+    }
+    .checkBox {
+        width: 25px;
+    }
+    input{
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+</style>
+
+<script>
+$("#toteldia").click(function() {
+if($("#toteldia").is(':checked')) {
+
+
+
+$("#data_final_event").prop('disabled', true);
+$("#hora_final_event").prop('disabled', true);
+$("#hora_inici_event").prop('disabled', true);
+
+} else {
+$("#data_final_event").prop('disabled', false);
+$("#hora_final_event").prop('disabled', false);
+$("#hora_inici_event").prop('disabled', false);
+
+
+
+}
+});
+</script>

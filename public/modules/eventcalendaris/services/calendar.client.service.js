@@ -15,6 +15,7 @@ angular.module('eventcalendaris')
             /**
              * Funció per obtenir els events totals d'un usuari
              * que hi ha emmagatzemats a la base de dades.
+             *
              * @returns {Array} --> Retorna un array amb els events obtingut.
              */
             getEventsTotals: function () {
@@ -32,15 +33,20 @@ angular.module('eventcalendaris')
             },
 
             /**
-             * [[Description]]
+             * Funció per assignar uns nous events al servei.
              * @param {[[Type]]} newEvents [[Description]]*/
 
             setEventsTotals: function (newEvents) {
                 eventsTotals = newEvents;
-                console.log('CALENDAR CLIENT SERVICE RECIVE FROM EVENTCALENDARI CLIENT CONTROLLER : EVENTS TOTALS: ' + eventsTotals);
                 console.log(eventsTotals);
             },
 
+            /**
+             * Funció per comprovar si un event ja existeix a eventTotals.
+             *
+             * @param event --> Event a comprovar.
+             * @returns {boolean}
+             */
             comprovarSiExisteix: function (event) {
 
 
@@ -58,12 +64,12 @@ angular.module('eventcalendaris')
                     else
                         return true;
 
-
             },
 
             /**
              * Funció per 'convertir' i afegir els events obtinguts des de
              * Google a la base de dades.
+             *
              * @param {Object} googleEvents --> Objecte amb els resultats
              *                                  obtinguts des de Google.
              */
@@ -87,10 +93,6 @@ angular.module('eventcalendaris')
                         dataInicial = gEvents[i].start.dateTime;
                         dataFinal = gEvents[i].end.dateTime;
                     }
-
-
-
-
                     var eventcalendari = new Eventcalendaris.api({
                         nom: gEvents[i].summary,
                         tipus: googleEvents.summary,
@@ -112,22 +114,12 @@ angular.module('eventcalendaris')
                     }else{
                         console.log('existeix');
                     }
-
-
-
-
-                    /*Eventcalendaris.api.query().$promise.then(function (eventsNous) {
-
-                        console.log(eventsNous);
-                    /*if (!_this.comprovarSiExisteix(eventcalendari, eventsNous)) {
-
-
-                    }
-                    }); */
-
                 }
             },
 
+            /**
+             * Funció que avisa als controlador després d'obtenir events nous.
+             */
             startAll: function () {
                 Eventcalendaris.query().$promise.then(function (cal) {
                     eventsTotals = cal;
